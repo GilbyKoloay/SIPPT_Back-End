@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const BPJSSchema = new mongoose.Schema({
-    _patient: {
-        type: String,
-        required: [true, "'ID Pasien' tidak boleh kosong"],
-    },
     cardNumber: {
         type: String,
         required: [true, "'Nomor Kartu' tidak boleh kosong"],
@@ -26,7 +22,6 @@ const BPJSSchema = new mongoose.Schema({
             type: Number,
             required: [true, "'Tahun' dari 'Tanggal Lahir' tidak boleh kosong"],
         },
-        required: [true, "'Tanggal Lahir' tidak boleh kosong"],
     },
     healthFacilityLevel: {
         type: String,
@@ -41,23 +36,15 @@ const BPJSSchema = new mongoose.Schema({
     NIK: {
         type: String,
         required: [true, "'NIK' tidak boleh kosong"],
+        unique: true,
     },
     address: {
-        village: {
-            type: String,
-            required: [true, "'Kec./Desa' dari 'Alamat' tidak boleh kosong"],
-        },
-        district: {
-            type: String,
-            required: [true, "'Kel.' dari 'Alamat' tidak boleh kosong"],
-        },
-        city: {
-            type: String,
-            required: [true, "Kab./Kota dari 'Alamat' tidak boleh kosong"],
-        },
+        type: String,
         required: [true, "'Alamat' tidak boleh kosong"],
     },
     // changeLog (array) (stores changes. in case when the patient's data is changed, etc)
+}, {
+    collection: 'BPJS',
 });
 
 // const changeLogSchema = new mongoose.Schema({});

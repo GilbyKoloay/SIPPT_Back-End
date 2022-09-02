@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const patientsSchema = new mongoose.Schema({
     _medicalRecord: {
         type: String,
-        required: [true, "'ID Rekam Medis' tidak boleh kosong"],
+        // required: [true, "'ID Rekam Medis' tidak boleh kosong"],
+        default: null, // dev mode
     },
     _BPJS: {
         type: String,
-        required: [true, "'ID BPJS' tidak boleh kosong"],
+        // required: [true, "'ID BPJS' tidak boleh kosong"],
+        default: null, // dev mode
     },
     medicalRecordNumber: {
         type: Number,
@@ -83,6 +85,8 @@ const patientsSchema = new mongoose.Schema({
         required: [true, "'Pekerjaan' tidak boleh kosong"],
     },
     // changeLog (array) (stores changes. in case when the patient's data is changed, etc)
+}, {
+    collection: 'Patients',
 });
 
 // const changeLogSchema = new mongoose.Schema({});

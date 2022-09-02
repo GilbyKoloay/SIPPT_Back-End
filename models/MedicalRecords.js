@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const medicalRecordsSchema = new mongoose.Schema({
     records: {
-        default: null,
+        type: Array,
     },
 });
 
@@ -17,7 +17,7 @@ const recordsSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        // date now
+        default: Date.now,
     },
     bodyHeight: {
         type: mongoose.Types.Decimal128,
