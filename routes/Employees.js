@@ -9,10 +9,10 @@ const deleteData = require('../controllers/employees/delete');
 
 const router = express.Router();
 
-router.get('/getAll', getAll);        // get all employees data
-router.get('/get', get);           // get employee data
-router.post('/create', create);       // create new employee
-router.patch('/change', change);      // change employee data
-router.delete('/delete', deleteData); // delete employee data
+router.get('/getAll', getAll);          // get all employees data
+router.get('/get', get);                // get employee data
+router.post('/create', create);         // create new employee
+router.patch('/change', change);        // change employee data
+router.delete('/delete', deleteData);   // delete employee data
 
 module.exports = router;

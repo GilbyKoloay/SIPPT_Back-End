@@ -18,7 +18,7 @@ const employeesSchema = new mongoose.Schema({
     // loginHistory (array) (stores user's data when logged in)
     // logoutHistory (array) (stores user's data when logged out)
     // log (array) (stores user's activities history)
-    // changeLog (stores changes. in case when the staff's data is changed, etc)
+    // changeLog (stores changes. in case when the employee's data is changed, etc)
 }, {
     collection: 'Employees',
 });

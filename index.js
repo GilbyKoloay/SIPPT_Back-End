@@ -19,10 +19,12 @@ app.use((req, res, next) => {
 // importing routes
 const {
     employeesRouter,
+    patientsRouter,
 } = require('./routes');
 
 // using routes
-app.use('/api/employees', employeesRouter);
+app.use('/api/employee', employeesRouter);
+app.use('/api/patient', patientsRouter);
 
 // 404 endpoint handler
 app.use((req, res) => {

@@ -35,7 +35,6 @@ const patientsSchema = new mongoose.Schema({
             type: Number,
             required: [true, "'Tahun' dari 'Tanggal Lahir' tidak boleh kosong"],
         },
-        required: [true, "'Tanggal Lahir' tidak boleh kosong"],
     },
     sex: {
         type: String,
@@ -59,7 +58,6 @@ const patientsSchema = new mongoose.Schema({
             type: String,
             required: [true, "Kab./Kota dari 'Alamat' tidak boleh kosong"],
         },
-        required: [true, "'Alamat' tidak boleh kosong"],
     },
     phoneNumber: {
         type: Number,
