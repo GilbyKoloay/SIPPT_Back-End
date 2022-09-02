@@ -1,9 +1,9 @@
 const db = require('../../models/Employees');
 const mongoose = require('mongoose');
 
-// change data in Employees collections
+// delete data in Employees collections
 module.exports = async (req, res) => {
-    const { _id, username, password, role } = req.body;
+    const { _id } = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
@@ -15,17 +15,13 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.updateOne({
+        const result = await db.deleteOne({
             _id,
-        }, {
-            username,
-            password,
-            role,
         });
 
         res.status(200).json({
             status: `success`,
-            msg: `Berhasil mengubah data Pegawai`,
+            msg: `Berhasil menghapus data Pegawai`,
             desc: null,
             data: result,
         });
@@ -33,7 +29,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal mengubah data Pegawai`,
+            msg: `Gagal menghapus data Pegawai`,
             desc: e.message,
             data: null,
         });
