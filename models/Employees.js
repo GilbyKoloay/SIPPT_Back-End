@@ -13,13 +13,14 @@ const employeesSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['ADMINISTRATOR', 'LOKET', 'POLI UMUM', 'POLI GIGI', 'POLI KIA', 'APOTEK'],
-        // required: [true, "'' tidak boleh kosong"],
-        default: null,
+        required: [true, "'Peran' tidak boleh kosong"],
     },
     // loginHistory (array) (stores user's data when logged in)
     // logoutHistory (array) (stores user's data when logged out)
     // log (array) (stores user's activities history)
     // changeLog (stores changes. in case when the staff's data is changed, etc)
+}, {
+    collection: 'Employees',
 });
 
 // const loginHistorySchema = new mongoose.Schema({});

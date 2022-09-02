@@ -2,24 +2,37 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// importing routes
-const {
-    employeesRouter,
-} = require('./routes');
-
 
 
 // create express app
 const app = express();
 
-// middleware ind dev
+// middleware
+app.use(express.json());
+
+// middleware in dev
 app.use((req, res, next) => {
     console.log(`${req.path} | ${req.method}`);
     next();
 });
 
+// importing routes
+const {
+    employeesRouter,
+} = require('./routes');
+
 // using routes
 app.use('/api/employees', employeesRouter);
+
+// 404 endpoint handler
+app.use((req, res) => {
+    res.status(404).json({
+        status: `error`,
+        msg: `Tidak ditemukan`,
+        desc: `Endpoint not found`,
+        data: null,
+    });
+});
 
 // connect to database and listen for requests
 mongoose.connect(process.env.DATABASE_URI)
