@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: `error`,
-            msg: `ID Pegawai tidak ditemukan`,
+            msg: `ID Pegawai tidak valid`,
             desc: null,
             data: null,
         });

@@ -1,15 +1,28 @@
 const db = require('../../models/Employees');
 const mongoose = require('mongoose');
 
-// get all data in Employees collections
+// get single data in Employees collections
 module.exports = async (req, res) => {
-    try {
-        const result = await db.find();
+    const { _id } = req.body;
 
-        if(result.length === 0) {
+    if(!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(400).json({
+            status: `error`,
+            msg: `ID Pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    try {
+        const result = await db.findOne({
+            _id,
+        });
+
+        if(!result) {
             return res.status(200).json({
                 status: `error`,
-                msg: `Data Pegawai kosong`,
+                msg: `Data Pegawai tidak ditemukan`,
                 desc: null,
                 data: null,
             });
@@ -17,7 +30,7 @@ module.exports = async (req, res) => {
 
         res.status(200).json({
             status: `success`,
-            msg: `Berhasil mengambil semua data Pegawai`,
+            msg: `Berhasil mengambil data Pegawai`,
             desc: null,
             data: result,
         });
@@ -25,7 +38,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal mengambil semua data Pegawai`,
+            msg: `Gagal mengambil data Pegawai`,
             desc: e.message,
             data: null,
         });
