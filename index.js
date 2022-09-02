@@ -2,7 +2,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// importing routes
+const {
+    employeesRouter,
+} = require('./routes');
+
+
+
+// create express app
 const app = express();
+
+// middleware ind dev
+app.use((req, res, next) => {
+    console.log(`${req.path} | ${req.method}`);
+    next();
+});
+
+// using routes
+app.use('/api/employees', employeesRouter);
 
 // connect to database and listen for requests
 mongoose.connect(process.env.DATABASE_URI)

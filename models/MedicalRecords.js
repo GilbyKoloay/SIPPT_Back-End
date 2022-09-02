@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const medicalRecordsSchema = new mongoose.Schema({
-    records: [{
-        type: Array,
+    records: {
         default: null,
-    }],
+    },
 });
 
 const recordsSchema = new mongoose.Schema({
@@ -51,7 +50,7 @@ const recordsSchema = new mongoose.Schema({
         default: null,
     },
     laboratorium: {
-        // type: String, // tanya ini tipe apa
+        type: String, // tanya ini tipe apa
         // required: [true, "'Nadi' tidak boleh kosong"], // tanya kalo ini wajib ato nd
         default: null,
     },
@@ -69,6 +68,8 @@ const recordsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+}, {
+    collection: 'MedicalRecords',
 });
 
 module.exports = mongoose.model('MedicalRecords', medicalRecordsSchema);
