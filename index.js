@@ -20,11 +20,13 @@ app.use((req, res, next) => {
 const {
     employeesRouter,
     patientsRouter,
+    loginRouter,
 } = require('./routes');
 
 // using routes
 app.use('/api/employee', employeesRouter);
 app.use('/api/patient', patientsRouter);
+app.use('/api/login', loginRouter);
 
 // 404 endpoint handler
 app.use((req, res) => {
