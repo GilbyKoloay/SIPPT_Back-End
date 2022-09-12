@@ -10,6 +10,10 @@ const employeesSchema = new mongoose.Schema({
         type: String,
         required: [true, "'Password' tidak boleh kosong"],
     },
+    name: {
+        type: String,
+        required: [true, "'Nama' tidak boleh kosong"],
+    },
     role: {
         type: String,
         enum: ['ADMINISTRATOR', 'LOKET', 'POLI UMUM', 'POLI GIGI', 'POLI KIA', 'APOTEK'],

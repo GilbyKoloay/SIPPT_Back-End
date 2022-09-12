@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -6,6 +7,9 @@ require('dotenv').config();
 
 // create express app
 const app = express();
+
+// CORS handler
+app.use(cors());
 
 // middleware
 app.use(express.json());
@@ -20,12 +24,16 @@ app.use((req, res, next) => {
 const {
     employeesRouter,
     patientsRouter,
+    BPJSRouter,
+    medicalRecordsRouter,
     loginRouter,
 } = require('./routes');
 
 // using routes
 app.use('/api/employee', employeesRouter);
 app.use('/api/patient', patientsRouter);
+app.use('/api/BPJS', BPJSRouter);
+app.use('/api/medicalRecord', medicalRecordsRouter);
 app.use('/api/login', loginRouter);
 
 // 404 endpoint handler

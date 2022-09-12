@@ -3,12 +3,11 @@ const mongoose = require('mongoose');
 
 module.exports = async (req, res) => {
     const { username, password } = req.body;
+    console.log(`username = ${username} | password = ${password}`);
 
     try {
         // username checking
-        const usernameResult = await db.findOne({
-            username,
-        });
+        const usernameResult = await db.findOne({ username });
         if(!usernameResult) {
             return res.status(404).json({
                 status: `error`,
@@ -19,7 +18,10 @@ module.exports = async (req, res) => {
         }
 
         // password checking
-        const passwordResult = await db.findOne({ password });
+        const passwordResult = await db.findOne({
+            username,
+            password, 
+        }).select({ "password": 0 });
         if(!passwordResult) {
             return res.status(404).json({
                 status: `error`,

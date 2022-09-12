@@ -48,17 +48,17 @@ const patientsSchema = new mongoose.Schema({
         required: [true, "'Nama Kartu Keluarga' tidak boleh kosong"],
     },
     address: {
-        village: {
+        districtCity: {
             type: String,
-            required: [true, "'Kec./Desa' dari 'Alamat' tidak boleh kosong"],
+            required: [true, "Kab./Kota dari 'Alamat' tidak boleh kosong"],
         },
-        district: {
+        subDistrict: {
             type: String,
             required: [true, "'Kel.' dari 'Alamat' tidak boleh kosong"],
         },
-        city: {
+        wardVillage: {
             type: String,
-            required: [true, "Kab./Kota dari 'Alamat' tidak boleh kosong"],
+            required: [true, "'Kec./Desa' dari 'Alamat' tidak boleh kosong"],
         },
     },
     phoneNumber: {

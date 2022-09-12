@@ -1,11 +1,11 @@
 const express = require('express');
 
 // importing Employees controllers
-const getAll = require('../controllers/employees/getAll');
-const get = require('../controllers/employees/get');
-const create = require('../controllers/employees/create');
-const change = require('../controllers/employees/change');
-const deleteData = require('../controllers/employees/delete');
+const getAll = require('../controllers/Employees/getAll');
+const get = require('../controllers/Employees/get');
+const create = require('../controllers/Employees/create');
+const change = require('../controllers/Employees/change');
+const deleteData = require('../controllers/Employees/delete');
 
 const router = express.Router();
 

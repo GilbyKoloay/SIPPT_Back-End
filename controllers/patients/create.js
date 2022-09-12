@@ -1,89 +1,36 @@
 const db = require('../../models/Patients');
-const dbMR = require('../../models/MedicalRecords');
-const dbB = require('../../models/BPJS');
 const mongoose = require('mongoose');
 
 // create new data in Patients collections
 module.exports = async (req, res) => {
-    const { patient, BPJS } = req.body;
     const {
+        _medicalRecord,
+        _BPJS,
         medicalRecordNumber,
-        name: patientName,
+        name,
         birthPlace,
-        birthDate: patientBirthDate,
+        birthDate,
         sex,
         familyCardName,
-        address: patientAddress,
+        address,
         phoneNumber,
         paymentMethod,
         religion,
         maritalStatus,
         job,
-    } = patient;
-    const {
-        cardNumber,
-        name: BPJSName,
-        birthDate: BPJSBirthDate,
-        healthFacilityLevel,
-        nursingClass,
-        NIK,
-        address: BPJSAddress,
-    } = BPJS;
+    } = req.body;
 
     try {
-        // create MedicalRecord
-        const MRResult = await dbMR.create({});
-        if(!MRResult) {
-            return res.status(500).json({
-                status: `error`,
-                msg: `Gagal menambahkan Pasien baru (tidak dapat membuat Rekam Medis)`,
-                desc: null,
-                data: null,
-            });
-        }
-
-        // create BPJS
-        const BResult = await dbB.create({
-            cardNumber,
-            name: BPJSName,
-            birthDate: {
-                date: BPJSBirthDate.date,
-                month: BPJSBirthDate.month,
-                year: BPJSBirthDate.year,
-            },
-            healthFacilityLevel,
-            nursingClass,
-            NIK,
-            address: BPJSAddress,
-        });
-        if(!BResult) {
-            return res.status(500).json({
-                status: `error`,
-                msg: `Gagal menambahkan Pasien baru (tidak dapat membuat BPJS)`,
-                desc: null,
-                data: null,
-            });
-        }
-
-        // create Patient
         const result = await db.create({
-            _medicalRecord: MRResult._id,
-            _BPJS: BResult._id,
+            _medicalRecord,
+            _BPJS,
             medicalRecordNumber,
-            name: patientName,
+            name,
             birthPlace,
-            birthDate: {
-                date: patientBirthDate.date,
-                month: patientBirthDate.month,
-                year: patientBirthDate.year,
-            },
+            birthDate,
             sex,
             familyCardName,
-            address: {
-                village: patientAddress.village,
-                district: patientAddress.district,
-                city: patientAddress.city,
-            },
+            address,
             phoneNumber,
             paymentMethod,
             religion,
@@ -93,24 +40,15 @@ module.exports = async (req, res) => {
 
         res.status(200).json({
             status: `success`,
-            msg: `Berhasil menambahkan Pegawai baru`,
+            msg: `Berhasil menambahkan Pasien baru`,
             desc: null,
-            data: {
-                patient: result,
-                medicalRecord: MRResult,
-                BPJS: BResult,
-            },
+            data: result,
         });
     }
     catch(e) {
-        console.log(`created medical record _id: ${MR_result2._id}`)
-        MR_result2 = await dbMR.deleteOne({
-            _id: MR_result2._id,
-        });
-
         res.status(500).json({
             status: `error`,
-            msg: `Gagal menambahkan Pegawai baru`,
+            msg: `Gagal menambahkan Pasien baru`,
             desc: e.message,
             data: null,
         });

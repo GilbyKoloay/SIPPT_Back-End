@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 
 // create new data in Employees collections
 module.exports = async (req, res) => {
-    const { username, password, role } = req.body;
+    const { username, password, name, role } = req.body;
 
     try {
         const result = await db.create({
             username,
             password,
+            name,
             role,
         });
 

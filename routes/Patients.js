@@ -1,8 +1,8 @@
 const express = require('express');
 
 // importing Patients controllers
-const getAll = require('../controllers/patients/getAll');
-const create = require('../controllers/patients/create');
+const getAll = require('../controllers/Patients/getAll');
+const create = require('../controllers/Patients/create');
 
 const router = express.Router();
 
