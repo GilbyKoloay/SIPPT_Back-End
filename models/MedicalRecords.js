@@ -1,11 +1,5 @@
 const mongoose = require('mongoose');
 
-const medicalRecordsSchema = new mongoose.Schema({
-    records: {
-        type: Array,
-    },
-});
-
 const recordsSchema = new mongoose.Schema({
     _createdBy: {
         type: String,
@@ -14,10 +8,6 @@ const recordsSchema = new mongoose.Schema({
     _medicalPrescription: {
         type: String,
         required: [true, "'ID Resep Obat' tidak boleh kosong"],
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
     },
     bodyHeight: {
         type: mongoose.Types.Decimal128,
@@ -70,6 +60,11 @@ const recordsSchema = new mongoose.Schema({
     },
 }, {
     collection: 'MedicalRecords',
+    timestamps: true,
+});
+
+const medicalRecordsSchema = new mongoose.Schema({
+    records: [recordsSchema],
 });
 
 module.exports = mongoose.model('MedicalRecords', medicalRecordsSchema);
