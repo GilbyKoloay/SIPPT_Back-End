@@ -15,9 +15,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.updateOne({
-            _id,
-        }, {
+        const result = await db.updateOne({ _id, }, {
             username,
             password,
             role,

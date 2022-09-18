@@ -1,1 +1,9 @@
 /node_modules
+
+# dev
+/controllers/change.js
+/controllers/create.js
+/controllers/get.js
+/controllers/delete.js
+/controllers/get.js
+/controllers/getAll.js

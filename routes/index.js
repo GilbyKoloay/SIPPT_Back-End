@@ -5,6 +5,7 @@ const patientsRouter = require('./Patients');
 const BPJSRouter = require('./BPJS');
 const medicalRecordsRouter = require('./MedicalRecords');
 const loginRouter = require('./Login');
+const drugRouter = require('./drug');
 
 module.exports = {
     employeesRouter,
@@ -12,4 +13,5 @@ module.exports = {
     BPJSRouter,
     medicalRecordsRouter,
     loginRouter,
+    drugRouter,
 };

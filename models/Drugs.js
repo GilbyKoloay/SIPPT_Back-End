@@ -10,25 +10,29 @@ const drugsSchema = new mongoose.Schema({
         type: String,
         enum: ['TABLET', 'KAPSUL', 'KAPLET', 'SIRUP', 'DROPS', 'SALEP', 'TETES', 'KRIM', 'GEL', 'SUPOSITORIA', 'INJEKSI', 'CAIRAN INFUS', 'BMHP'],
     },
-    satuan: {
+    unit: {
         type: String,
         enum: ['TABLET', 'BOTOL', 'BOX', 'ROLL', 'SATCHET'],
     },
-    totalStocks: {
+    totalStock: {
         type: Number,
-        required: [true, ''],
+        required: [true, "'Jumlah Stok' tidak boleh kosong"],
     },
-    tanggalPenerimaan: {
+    receiveDate: {
         type: Date,
+        required: [true, "'Tanggal Terima' tidak boleh kosong"],
     },
-    jumlahPenerimaan: {
-        type: String, // jumlah yang diterima
+    receiveTotal: {
+        type: Number, // jumlah yang diterima
+        required: [true, "'Total Penerimaan' tidak boleh kosong"],
     },
-    tanggalKadaluarsa: {
+    expireDate: {
         type: Date,
+        required: [true, "'Tanggal Kadaluarsa' tidak boleh kosong"]
     },
     batchNumber: {
         type: String,
+        required: [true, "'Nomor Batch' tidak boleh kosong"]
     },
 });
 
