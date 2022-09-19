@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 // get record data in MedicalRecords collections
 module.exports = async (req, res) => {
-    const { _id, _idRecord } = req.body;
+    const { _id, _record } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) {
+    if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_record)) {
         return res.status(400).json({
             status: `error`,
             msg: `ID Rekam Medis tidak valid`,
@@ -15,9 +15,10 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.findOne({ _id });
+        const RMresult = await db.findOne({ _id });
+        const result = RMresult.records.filter(r => r._id.toString() === _record);
 
-        if(!result) {
+        if(!RMresult || RMresult.records.length === 0 || !result) {
             return res.status(200).json({
                 status: `error`,
                 msg: `Data Rekam Medis tidak ditemukan`,
