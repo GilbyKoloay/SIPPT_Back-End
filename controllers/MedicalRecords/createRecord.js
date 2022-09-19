@@ -1,14 +1,55 @@
 const db = require('../../models/MedicalRecords');
 const mongoose = require('mongoose');
 
-// create new data in MedicalRecords collections
+// create record in MedicalRecords collections
 module.exports = async (req, res) => {
+    const {
+        _id,
+        _createdBy,
+        _medicalPrescription,
+        bodyHeight,
+        bodyWeight,
+        tension,
+        pulse,
+        respiration,
+        bodyTemperature,
+        laboratorium,
+        his_phyExam_dia,
+        suggestion,
+        initials,
+    } = req.body;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(400).json({
+            status: `error`,
+            msg: `ID Rekam Medis tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
     try {
-        const result = await db.create({});
+        const result = await db.updateOne({ _id }, { $push: {
+            records: {
+                _id: mongoose.Types.ObjectId(),
+                _createdBy,
+                _medicalPrescription,
+                bodyHeight,
+                bodyWeight,
+                tension,
+                pulse,
+                respiration,
+                bodyTemperature,
+                laboratorium,
+                his_phyExam_dia,
+                suggestion,
+                initials,
+            }
+        }});
 
         res.status(200).json({
             status: `success`,
-            msg: `Berhasil membuat Rekaman Medis baru`,
+            msg: `Berhasil menambahkan Rekam Medis baru`,
             desc: null,
             data: result,
         });
@@ -16,7 +57,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal membuat Rekaman Medis baru`,
+            msg: `Gagal menambahkan Rekam Medis baru`,
             desc: e.message,
             data: null,
         });
