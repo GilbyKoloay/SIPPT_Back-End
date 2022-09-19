@@ -28,10 +28,19 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const RMresult = await db.findOne({ _id });
-        let recordsResult = RMresult.records;
-        if(recordsResult.length !== 0) {
-            recordsResult.forEach(r => {
+        const MRresult = await db.findOne({ _id });
+        if(!MRresult) {
+            return res.status(200).json({
+                status: `error`,
+                msg: `Data Rekam Medis tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
+
+        let records = MRresult.records;
+        if(records.length !== 0) {
+            records.forEach(r => {
                 if(r._id.toString() === _record) {
                     r.bodyHeight = bodyHeight;
                     r.bodyWeight = bodyWeight;
@@ -47,7 +56,7 @@ module.exports = async (req, res) => {
             });
         }
         const result = await db.updateOne({ _id }, {
-            records: recordsResult,
+            records: records,
         });
         
         res.status(200).json({

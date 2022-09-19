@@ -1,11 +1,11 @@
 const db = require('../../models/MedicalRecords');
 const mongoose = require('mongoose');
 
-// get record data in MedicalRecords collections
+// delete record in Medical Record collections
 module.exports = async (req, res) => {
     const { _id, _record } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_record)) {
+    if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: `error`,
             msg: `ID Rekam Medis tidak valid`,
@@ -25,19 +25,16 @@ module.exports = async (req, res) => {
             });
         }
 
-        const result = MRresult.records.filter(r => r._id.toString() === _record);
-        if(MRresult.records.length === 0 || !result) {
-            return res.status(200).json({
-                status: `error`,
-                msg: `Data Rekam Medis tidak ditemukan`,
-                desc: null,
-                data: null,
-            });
-        }
+        let records = MRresult.records;
+        records = records.filter(r => r._id.toString() !== _record);
+        
+        const result = await db.updateOne({ _id }, {
+            records,
+        });
         
         res.status(200).json({
             status: `success`,
-            msg: `Berhasil mengambil data Rekam Medis`,
+            msg: `Berhasil menghapus data Rekam Medis`,
             desc: null,
             data: result,
         });
@@ -45,7 +42,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal mengambil data Rekam Medis`,
+            msg: `Gagal menghapus data Rekam Medis`,
             desc: e.message,
             data: null,
         });
