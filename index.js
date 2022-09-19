@@ -26,8 +26,9 @@ const {
     patientsRouter,
     BPJSRouter,
     medicalRecordsRouter,
-    loginRouter,
+    queueRouter,
     drugRouter,
+    loginRouter,
 } = require('./routes');
 
 // using routes
@@ -36,6 +37,7 @@ app.use('/api/patient', patientsRouter);
 app.use('/api/BPJS', BPJSRouter);
 app.use('/api/medicalRecord', medicalRecordsRouter);
 app.use('/api/drug', drugRouter);
+app.use('/api/queue', queueRouter);
 app.use('/api/login', loginRouter);
 
 // 404 endpoint handler

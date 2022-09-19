@@ -58,13 +58,10 @@ const recordsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-}, {
-    collection: 'MedicalRecords',
-    timestamps: true,
-});
+}, { timestamps: true });
 
 const medicalRecordsSchema = new mongoose.Schema({
     records: [recordsSchema],
-});
+}, { collection: 'MedicalRecords' });
 
 module.exports = mongoose.model('MedicalRecords', medicalRecordsSchema);
