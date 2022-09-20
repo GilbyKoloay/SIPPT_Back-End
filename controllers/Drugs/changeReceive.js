@@ -9,17 +9,16 @@ module.exports = async (req, res) => {
         receiveTotal,
     } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) {
+    if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_receive)) {
         return res.status(400).json({
             status: `error`,
             msg: `ID Obat tidak valid`,
-            desc: null,
             data: null,
         });
     }
 
     try {
-        let drugResult = await db.findOne({ _id });
+        let drugResult = await db.findOne({ _id }, { drug: 1 });
         if(!drugResult) {
             return res.status(400).json({
                 status: `error`,
@@ -33,6 +32,7 @@ module.exports = async (req, res) => {
                 status: `error`,
                 msg: `Obat kosong`,
                 desc: null,
+            desc: null,
                 data: null,
             });
         }
