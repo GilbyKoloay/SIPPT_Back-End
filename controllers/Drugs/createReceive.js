@@ -1,7 +1,7 @@
 const db = require('../../models/Drugs');
 const mongoose = require('mongoose');
 
-// create new data in Drugs collections
+// create new drug inside Drugs collections
 module.exports = async (req, res) => {
     const {
         _id,
