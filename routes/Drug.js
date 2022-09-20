@@ -6,6 +6,7 @@ const get = require('../controllers/drugs/get');
 const create = require('../controllers/drugs/create');
 const change = require('../controllers/drugs/change');
 const deleteData = require('../controllers/drugs/delete');
+const createDrug = require('../controllers/drugs/createDrug');
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.get('/get', get);                // get drug data
 router.post('/create', create);         // create new drug
 router.patch('/change', change);        // change drug data
 router.delete('/delete', deleteData);   // delete drug data
+router.post('/createDrug', createDrug); // create new drug in drugs
 
 module.exports = router;

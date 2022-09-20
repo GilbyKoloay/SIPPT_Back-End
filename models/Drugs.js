@@ -13,7 +13,7 @@ const expenditureSchema = new mongoose.Schema({
 const drugSchema = new mongoose.Schema({
     receiveDate: {
         type: Date,
-        default: new Date(),
+        default: new Date(), // dev
     },
     expireDate: {
         type: Date,
