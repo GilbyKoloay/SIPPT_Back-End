@@ -9,16 +9,18 @@ const deleteData = require('../controllers/drugs/delete');
 const createReceive = require('../controllers/drugs/createReceive');
 const changeReceive = require('../controllers/drugs/changeReceive');
 const deleteReceive = require('../controllers/drugs/deleteReceive');
+const createExpenditure = require('../controllers/drugs/createExpenditure');
 
 const router = express.Router();
 
-router.get('/getAll', getAll);                  // get all drugs data
-router.get('/get', get);                        // get drug data
-router.post('/create', create);                 // create new drug
-router.patch('/change', change);                // change drug data
-router.delete('/delete', deleteData);           // delete drug data
-router.post('/createReceive', createReceive);   // create new drug in drugs
-router.patch('/changeReceive', changeReceive);  // change drug in drugs
-router.delete('/deleteReceive', deleteReceive); // delete drug in drugs
+router.get('/getAll', getAll);                          // get all drugs data
+router.get('/get', get);                                // get drug data
+router.post('/create', create);                         // create new drug
+router.patch('/change', change);                        // change drug data
+router.delete('/delete', deleteData);                   // delete drug data
+router.post('/createReceive', createReceive);           // create new receivement in drugs
+router.patch('/changeReceive', changeReceive);          // change receivement in drugs
+router.delete('/deleteReceive', deleteReceive);         // delete receivement in drugs
+router.post('/createExpenditure', createExpenditure);   // create new expenditure in receivemtn in drugs
 
 module.exports = router;

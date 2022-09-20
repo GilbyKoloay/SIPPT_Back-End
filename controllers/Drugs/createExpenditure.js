@@ -5,10 +5,11 @@ const mongoose = require('mongoose');
 module.exports = async (req, res) => {
     const {
         _id,
-        receiveTotal,
+        _receive,
+        expenditureTotal,
     } = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) {
+    
+    if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_receive)) {
         return res.status(400).json({
             status: `error`,
             msg: `ID Obat tidak valid`,
@@ -18,7 +19,22 @@ module.exports = async (req, res) => {
     }
     
     try {
-        const result = await db.updateOne({ _id }, { $push: { drug: { receiveTotal } } });
+        let drugs = await db.findOne({ _id }, { drug: 1 });
+        if(!drugs) {
+            return res.status(200).json({
+                status: `error`,
+                msg: `Obat tidak ditemukan`,
+                desc: null,
+                data: result,
+            });
+        }
+        drugs.drug.forEach(r => {
+            if(r._id.toString() === _receive) {
+                r.expenditure.push({ expenditureTotal });
+            }
+        });
+
+        const result = await db.updateOne({ _id }, { drug: drugs.drug });
 
         res.status(200).json({
             status: `success`,
