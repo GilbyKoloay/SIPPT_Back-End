@@ -10,6 +10,7 @@ const createReceive = require('../controllers/drugs/createReceive');
 const changeReceive = require('../controllers/drugs/changeReceive');
 const deleteReceive = require('../controllers/drugs/deleteReceive');
 const createExpenditure = require('../controllers/drugs/createExpenditure');
+const changeExpenditure = require('../controllers/drugs/changeExpenditure');
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router.delete('/delete', deleteData);                   // delete drug data
 router.post('/createReceive', createReceive);           // create new receivement in drugs
 router.patch('/changeReceive', changeReceive);          // change receivement in drugs
 router.delete('/deleteReceive', deleteReceive);         // delete receivement in drugs
-router.post('/createExpenditure', createExpenditure);   // create new expenditure in receivemtn in drugs
+router.post('/createExpenditure', createExpenditure);   // create new expenditure in receivement in drugs
+router.patch('/changeExpenditure', changeExpenditure);   // change expenditure in receivement in drugs
 
 module.exports = router;
