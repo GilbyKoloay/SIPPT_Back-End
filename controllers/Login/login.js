@@ -1,9 +1,13 @@
 const db = require('../../models/Employees');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+
+const createToken = (_id) => {
+    return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '6h'});
+};
 
 module.exports = async (req, res) => {
     const { username, password } = req.body;
-    console.log(`username = ${username} | password = ${password}`);
 
     try {
         // username checking
@@ -31,11 +35,18 @@ module.exports = async (req, res) => {
             });
         }
 
+        // create token
+        const token = createToken(passwordResult._id);
+        console.log(passwordResult._id);
+
         res.status(200).json({
             status: `success`,
             msg: `Berhasil melakukan login`,
             desc: null,
-            data: passwordResult,
+            data: {
+                data: passwordResult,
+                token,
+            },
         });
     }
     catch(e) {
