@@ -9,10 +9,10 @@ const deleteData = require('../controllers/Patients/delete');
 
 const router = express.Router();
 
-router.get('/getAll', getAll);          // get all patients data
-router.get('/get', get);                // get patient data
-router.post('/create', create);         // create new patient
-router.patch('/change', change);        // change patient data
-router.delete('/delete', deleteData);   // delete patient data
+router.get('/getAll', getAll);          // get all patients
+router.get('/get', get);                // get patient
+router.post('/create', create);         // create patient
+router.patch('/change', change);        // change patient
+router.delete('/delete', deleteData);   // delete patient
 
 module.exports = router;

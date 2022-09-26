@@ -1,6 +1,6 @@
 const express = require('express');
 
-// importing Drugs controllers
+// import Drugs controllers
 const getAll = require('../controllers/drugs/getAll');
 const get = require('../controllers/drugs/get');
 const create = require('../controllers/drugs/create');
@@ -15,16 +15,16 @@ const deleteExpenditure = require('../controllers/drugs/deleteExpenditure');
 
 const router = express.Router();
 
-router.get('/getAll', getAll);                          // get all drugs data
-router.get('/get', get);                                // get drug data
-router.post('/create', create);                         // create new drug
-router.patch('/change', change);                        // change drug data
-router.delete('/delete', deleteData);                   // delete drug data
-router.post('/createReceive', createReceive);           // create new receivement in drugs
-router.patch('/changeReceive', changeReceive);          // change receivement in drugs
-router.delete('/deleteReceive', deleteReceive);         // delete receivement in drugs
-router.post('/createExpenditure', createExpenditure);   // create new expenditure in receivement in drugs
-router.patch('/changeExpenditure', changeExpenditure);  // change expenditure in receivement in drugs
-router.delete('/deleteExpenditure', deleteExpenditure); // delete expenditure in receivement in drugs
+router.get('/getAll', getAll);                          // get all drugs
+router.get('/get', get);                                // get drug
+router.post('/create', create);                         // create drug
+router.patch('/change', change);                        // change drug
+router.delete('/delete', deleteData);                   // delete drug
+router.post('/createReceive', createReceive);           // create receivement in drug
+router.patch('/changeReceive', changeReceive);          // change receivement in drug
+router.delete('/deleteReceive', deleteReceive);         // delete receivement in drug
+router.post('/createExpenditure', createExpenditure);   // create expenditure in receivement in drug
+router.patch('/changeExpenditure', changeExpenditure);  // change expenditure in receivement in drug
+router.delete('/deleteExpenditure', deleteExpenditure); // delete expenditure in receivement in drug
 
 module.exports = router;

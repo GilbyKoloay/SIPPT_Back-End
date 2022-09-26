@@ -28,8 +28,8 @@ module.exports = async (req, res) => {
             address,
         });
 
-        res.status(200).json({
-            status: `success`,
+        res.status(201).json({
+            status: "success",
             msg: `Berhasil membuat BPJS baru`,
             desc: null,
             data: result,
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
+            status: "error",
             msg: `Gagal membuat BPJS baru`,
             desc: e.message,
             data: null,

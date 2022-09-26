@@ -7,25 +7,25 @@ module.exports = async (req, res) => {
         const result = await db.find();
 
         if(result.length === 0) {
-            return res.status(200).json({
-                status: `error`,
-                msg: `Data Pasien kosong`,
+            return res.status(404).json({
+                status: "error",
+                msg: `Data pasien kosong`,
                 desc: null,
                 data: null,
             });
         }
 
         res.status(200).json({
-            status: `success`,
-            msg: `Berhasil mengambil semua data Pasien`,
+            status: "success",
+            msg: `Berhasil mengambil semua data pasien`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal mengambil semua data Pasien`,
+            status: "error",
+            msg: `Gagal mengambil semua data pasien`,
             desc: e.message,
             data: null,
         });

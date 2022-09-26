@@ -7,8 +7,8 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
-            msg: `ID Pegawai tidak valid`,
+            status: "error",
+            msg: `ID pegawai tidak valid`,
             desc: null,
             data: null,
         });
@@ -21,17 +21,17 @@ module.exports = async (req, res) => {
             role,
         });
 
-        res.status(200).json({
-            status: `success`,
-            msg: `Berhasil mengubah data Pegawai`,
+        res.status(201).json({
+            status: "success",
+            msg: `Berhasil mengubah data pegawai`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal mengubah data Pegawai`,
+            status: "error",
+            msg: `Gagal mengubah data pegawai`,
             desc: e.message,
             data: null,
         });

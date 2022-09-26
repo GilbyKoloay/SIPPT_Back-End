@@ -38,17 +38,17 @@ module.exports = async (req, res) => {
             job,
         });
 
-        res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menambahkan Pasien baru`,
+        res.status(201).json({
+            status: "success",
+            msg: `Berhasil menambahkan pasien baru`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal menambahkan Pasien baru`,
+            status: "error",
+            msg: `Gagal menambahkan pasien baru`,
             desc: e.message,
             data: null,
         });

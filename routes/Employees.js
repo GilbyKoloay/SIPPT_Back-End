@@ -1,6 +1,6 @@
 const express = require('express');
 
-// importing Employees controllers
+// import Employees controllers
 const getAll = require('../controllers/Employees/getAll');
 const get = require('../controllers/Employees/get');
 const create = require('../controllers/Employees/create');
@@ -9,10 +9,10 @@ const deleteData = require('../controllers/Employees/delete');
 
 const router = express.Router();
 
-router.get('/getAll', getAll);          // get all employees data
-router.get('/get', get);                // get employee data
-router.post('/create', create);         // create new employee
-router.patch('/change', change);        // change employee data
-router.delete('/delete', deleteData);   // delete employee data
+router.get('/getAll', getAll);          // get all employees
+router.get('/get', get);                // get employee
+router.post('/create', create);         // create employee
+router.patch('/change', change);        // change employee
+router.delete('/delete', deleteData);   // delete employee
 
 module.exports = router;

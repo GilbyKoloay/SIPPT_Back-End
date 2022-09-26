@@ -7,8 +7,8 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
-            msg: `ID Rekam Medis tidak valid`,
+            status: "error",
+            msg: `ID rekam medis tidak valid`,
             desc: null,
             data: null,
         });
@@ -18,16 +18,16 @@ module.exports = async (req, res) => {
         const result = await db.deleteOne({ _id });
         
         res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menghapus data Rekam Medis`,
+            status: "success",
+            msg: `Berhasil menghapus data rekam medis`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal menghapus data Rekam Medis`,
+            status: "error",
+            msg: `Gagal menghapus data rekam medis`,
             desc: e.message,
             data: null,
         });

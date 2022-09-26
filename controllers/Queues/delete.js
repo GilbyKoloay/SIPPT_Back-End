@@ -7,8 +7,8 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
-            msg: `ID Antrian tidak valid`,
+            status: "error",
+            msg: `ID antrian tidak valid`,
             desc: null,
             data: null,
         });
@@ -21,16 +21,16 @@ module.exports = async (req, res) => {
         const result = await db.updateOne(data);
 
         res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menghapus data Antrian`,
+            status: "success",
+            msg: `Berhasil menghapus data antrian`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal menghapus data Antrian`,
+            status: "error",
+            msg: `Gagal menghapus data antrian`,
             desc: e.message,
             data: null,
         });

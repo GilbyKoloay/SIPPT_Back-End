@@ -1,6 +1,6 @@
 const express = require('express');
 
-// importing BPJS controllers
+// import BPJS controllers
 const getAll = require('../controllers/BPJS/getAll');
 const get = require('../controllers/BPJS/get');
 const create = require('../controllers/BPJS/create');
@@ -9,10 +9,10 @@ const deleteData = require('../controllers/BPJS/delete');
 
 const router = express.Router();
 
-router.get('/getAll', getAll);          // get all BPJS data
-router.get('/get', get);                // get BPJS data
-router.post('/create', create);         // create new BPJS
-router.patch('/change', change);        // change BPJS data
-router.delete('/delete', deleteData);   // delete BPJS data
+router.get('/getAll', getAll);          // get all BPJS
+router.get('/get', get);                // get BPJS
+router.post('/create', create);         // create BPJS
+router.patch('/change', change);        // change BPJS
+router.delete('/delete', deleteData);   // delete BPJS
 
 module.exports = router;

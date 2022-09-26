@@ -37,14 +37,13 @@ module.exports = async (req, res) => {
 
         // create token
         const token = createToken(passwordResult._id);
-        console.log(passwordResult._id);
 
         res.status(200).json({
             status: `success`,
             msg: `Berhasil melakukan login`,
             desc: null,
             data: {
-                data: passwordResult,
+                ...passwordResult._doc,
                 token,
             },
         });

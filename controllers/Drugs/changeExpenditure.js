@@ -12,8 +12,8 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_receive) || !mongoose.Types.ObjectId.isValid(_expenditure)) {
         return res.status(400).json({
-            status: `error`,
-            msg: `ID Obat tidak valid`,
+            status: "error",
+            msg: `ID obat tidak valid`,
             data: null,
         });
     }
@@ -32,9 +32,9 @@ module.exports = async (req, res) => {
 
         const result = await db.updateOne({ _id }, { drug: drugs.drug });
         
-        res.status(200).json({
-            status: `success`,
-            msg: `Berhasil mengubah data Obat`,
+        res.status(201).json({
+            status: "success",
+            msg: `Berhasil mengubah data pengeluaran obat`,
             desc: null,
             data: result,
         });
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal mengubah data Obat`,
+            msg: `Gagal mengubah data pengeluran obat`,
             desc: e.message,
             data: null,
         });

@@ -18,17 +18,17 @@ module.exports = async (req, res) => {
             batchNumber,
         });
 
-        res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menambahkan Obat baru`,
+        res.status(201).json({
+            status: "success",
+            msg: `Berhasil menambahkan obat baru`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal menambahkan Obat baru`,
+            status: "error",
+            msg: `Gagal menambahkan obat baru`,
             desc: e.message,
             data: null,
         });

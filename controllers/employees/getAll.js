@@ -7,25 +7,25 @@ module.exports = async (req, res) => {
         const result = await db.find();
 
         if(result.length === 0) {
-            return res.status(200).json({
-                status: `error`,
-                msg: `Data Pegawai kosong`,
+            return res.status(404).json({
+                status: "error",
+                msg: `Data pegawai kosong`,
                 desc: null,
                 data: null,
             });
         }
 
         res.status(200).json({
-            status: `success`,
-            msg: `Berhasil mengambil semua data Pegawai`,
+            status: "success",
+            msg: `Berhasil mengambil semua data pegawai`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal mengambil semua data Pegawai`,
+            status: "error",
+            msg: `Gagal mengambil semua data pegawai`,
             desc: e.message,
             data: null,
         });

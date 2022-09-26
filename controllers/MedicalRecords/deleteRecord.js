@@ -7,8 +7,8 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
-            msg: `ID Rekam Medis tidak valid`,
+            status: "error",
+            msg: `ID rekam medis tidak valid`,
             desc: null,
             data: null,
         });
@@ -17,9 +17,9 @@ module.exports = async (req, res) => {
     try {
         const MRresult = await db.findOne({ _id });
         if(!MRresult) {
-            return res.status(200).json({
-                status: `error`,
-                msg: `Data Rekam Medis tidak ditemukan`,
+            return res.status(404).json({
+                status: "error",
+                msg: `Data rekam medis tidak ditemukan`,
                 desc: null,
                 data: null,
             });
@@ -33,16 +33,16 @@ module.exports = async (req, res) => {
         });
         
         res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menghapus data Rekam Medis`,
+            status: "success",
+            msg: `Berhasil menghapus rekaman di rekam medis`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal menghapus data Rekam Medis`,
+            status: "error",
+            msg: `Gagal menghapus rekaman di rekam medis`,
             desc: e.message,
             data: null,
         });

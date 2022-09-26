@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
+            status: "error",
             msg: `ID BPJS tidak valid`,
             desc: null,
             data: null,
@@ -18,8 +18,8 @@ module.exports = async (req, res) => {
         const result = await db.findOne({ _id });
 
         if(!result) {
-            return res.status(200).json({
-                status: `error`,
+            return res.status(404).json({
+                status: "error",
                 msg: `Data BPJS tidak ditemukan`,
                 desc: null,
                 data: null,
@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
         }
         
         res.status(200).json({
-            status: `success`,
+            status: "success",
             msg: `Berhasil mengambil data BPJS`,
             desc: null,
             data: result,
@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
+            status: "error",
             msg: `Gagal mengambil data BPJS`,
             desc: e.message,
             data: null,

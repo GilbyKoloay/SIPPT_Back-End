@@ -7,16 +7,16 @@ module.exports = async (req, res) => {
         const result = await db.create({});
 
         res.status(200).json({
-            status: `success`,
-            msg: `Berhasil membuat Rekaman Medis baru`,
+            status: "success",
+            msg: `Berhasil membuat rekam medis baru`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal membuat Rekaman Medis baru`,
+            status: "error",
+            msg: `Gagal membuat rekam medis baru`,
             desc: e.message,
             data: null,
         });

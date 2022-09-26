@@ -14,7 +14,7 @@ app.use(cors());
 // middleware
 app.use(express.json());
 
-// middleware in dev
+// middleware (dev)
 app.use((req, res, next) => {
     console.log(`${req.path} | ${req.method}`);
     next();
@@ -35,10 +35,10 @@ const {
 app.use('/api/login', loginRouter);
 
 // middleware to authenticate user token
-const authentication = require('./middlewares/authorization');
+const authentication = require('./middlewares/authentication');
 app.use(authentication);
 
-// using routes (protected, means requires token)
+// using protected routes (requires token)
 app.use('/api/employee', employeesRouter);
 app.use('/api/patient', patientsRouter);
 app.use('/api/BPJS', BPJSRouter);

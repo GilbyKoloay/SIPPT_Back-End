@@ -13,17 +13,17 @@ module.exports = async (req, res) => {
             role,
         });
 
-        res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menambahkan Pegawai baru`,
+        res.status(201).json({
+            status: "success",
+            msg: `Berhasil menambahkan pegawai baru`,
             desc: null,
             data: result,
         });
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
-            msg: `Gagal menambahkan Pegawai baru`,
+            status: "error",
+            msg: `Gagal menambahkan pegawai baru`,
             desc: e.message,
             data: null,
         });

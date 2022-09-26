@@ -21,8 +21,8 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
-            msg: `ID Rekam Medis tidak valid`,
+            status: "error",
+            msg: `ID rekam medis tidak valid`,
             desc: null,
             data: null,
         });
@@ -47,9 +47,9 @@ module.exports = async (req, res) => {
             }
         }});
 
-        res.status(200).json({
-            status: `success`,
-            msg: `Berhasil menambahkan Rekam Medis baru`,
+        res.status(201).json({
+            status: "success",
+            msg: `Berhasil menambahkan rekaman baru di rekam medis`,
             desc: null,
             data: result,
         });
@@ -57,7 +57,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal menambahkan Rekam Medis baru`,
+            msg: `Gagal menambahkan rekaman baru di rekam medis`,
             desc: e.message,
             data: null,
         });

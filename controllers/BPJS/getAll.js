@@ -1,14 +1,14 @@
 const db = require('../../models/BPJS');
 const mongoose = require('mongoose');
 
-//  get all data in BPJS collections
+// get all data in BPJS collections
 module.exports = async (req, res) => {
     try {
         const result = await db.find();
 
         if(result.length === 0) {
-            return res.status(200).json({
-                status: `error`,
+            return res.status(404).json({
+                status: "error",
                 msg: `Data BPJS kosong`,
                 desc: null,
                 data: null,
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
         }
         
         res.status(200).json({
-            status: `success`,
+            status: "success",
             msg: `Berhasil mengambil semua data BPJS`,
             desc: null,
             data: result,
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
+            status: "error",
             msg: `Gagal mengambil semua data BPJS`,
             desc: e.message,
             data: null,

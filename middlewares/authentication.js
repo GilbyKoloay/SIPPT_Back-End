@@ -4,9 +4,9 @@ module.exports = async (req, res, next) => {
     // verifying authentication
     const { __token } = req.body;
     if(!__token) {
-        return res.status(400).json({
-            status: `error`,
-            msg: `Pengguna tidak memiliki Token Autentikasi`,
+        return res.status(403).json({
+            status: "error",
+            msg: `Pengguna tidak memiliki token autentikasi`,
             desc: null,
             data: null,
         });
@@ -15,10 +15,9 @@ module.exports = async (req, res, next) => {
     try {
         jwt.verify(__token, process.env.SECRET, (err, decoded) => {
             if(err) {
-                console.log(`gagal terautentikasi`);
-                return res.status(400).json({
-                    status: `error`,
-                    msg: `Token Pengguna tidak terautentikasi`,
+                return res.status(401).json({
+                    status: "error",
+                    msg: `Token pengguna tidak terautentikasi`,
                     desc: null,
                     data: null,
                 });
@@ -30,8 +29,8 @@ module.exports = async (req, res, next) => {
     }
     catch(e) {
         return res.status(500).json({
-            status: `error`,
-            msg: `Gagal melakukan Autentikasi Token Pengguna`,
+            status: "error",
+            msg: `Gagal melakukan autentikasi token pengguna`,
             desc: e.message,
             data: null,
         });

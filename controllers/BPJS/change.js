@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
-            status: `error`,
+            status: "error",
             msg: `ID BPJS tidak valid`,
             desc: null,
             data: null,
@@ -28,8 +28,8 @@ module.exports = async (req, res) => {
 
         });
         
-        res.status(200).json({
-            status: `success`,
+        res.status(201).json({
+            status: "success",
             msg: `Berhasil mengubah data BPJS`,
             desc: null,
             data: result,
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
     }
     catch(e) {
         res.status(500).json({
-            status: `error`,
+            status: "error",
             msg: `Gagal mengubah data BPJS`,
             desc: e.message,
             data: null,
