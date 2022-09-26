@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const changeLogSchema = new mongoose.Schema({
+    _changedBy: {
+        type: mongoose.Schema.ObjectId,
+        required: [true, "'ID Pembuat/Pengubah' akun tidak boleh kosong"],
+    },
+    changedAt: {
+        type: Date,
+        default: new Date(),
+    }
+}, { _id: false });
+
 const employeesSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -19,10 +30,10 @@ const employeesSchema = new mongoose.Schema({
         enum: ['ADMINISTRATOR', 'LOKET', 'POLI UMUM', 'POLI GIGI', 'POLI KIA', 'APOTEK'],
         required: [true, "'Peran' tidak boleh kosong"],
     },
+    changeLog: [changeLogSchema],
     // loginHistory (array) (stores user's data when logged in)
     // logoutHistory (array) (stores user's data when logged out)
     // log (array) (stores user's activities history)
-    // changeLog (stores changes. in case when the employee's data is changed, etc)
 }, {
     collection: 'Employees',
 });
