@@ -25,7 +25,11 @@ module.exports = async (req, res) => {
         const passwordResult = await db.findOne({
             username,
             password, 
-        }).select({ password: 0, __v: 0 });
+        }).select({
+            password: 0,
+            __v: 0,
+            changeLog: 0,
+        });
         if(!passwordResult) {
             return res.status(404).json({
                 status: "error",

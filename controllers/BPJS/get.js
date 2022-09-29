@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.findOne({ _id });
+        const result = await db.findOne({ _id }, { __v: 0});
 
         if(!result) {
             return res.status(404).json({

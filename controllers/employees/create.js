@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // create new data in Employees collections
 module.exports = async (req, res) => {
-    const { username, password, name, role, /* _employee */ } = req.body;
+    const { _employee, username, password, name, role } = req.body;
 
     try {
         const result = await db.create({
@@ -11,9 +11,10 @@ module.exports = async (req, res) => {
             password,
             name,
             role,
-            // changeLog: [{
-            //     _changedBy: _employee,
-            // }],
+            changeLog: [{
+                _changedBy: _employee,
+                description: "Menambah pegawai baru",
+            }],
         });
 
         res.status(201).json({

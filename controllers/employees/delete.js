@@ -15,7 +15,17 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.deleteOne({ _id });
+        let result = await db.findOne({ _id });
+        if(!result) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Pegawai tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
+        
+        result = await db.deleteOne({ _id });
 
         res.status(200).json({
             status: "success",
