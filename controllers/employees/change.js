@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 // change data in Employees collections
 module.exports = async (req, res) => {
-    const { _id, username, password, role } = req.body;
-
+    const { _id, username, password, role, /* _employee */ } = req.body;
+    
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
@@ -15,11 +15,23 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.updateOne({ _id, }, {
+        // let employee = await db.findOne({ _id }, { changeLog: 1 });
+        // employee.changeLog.push({
+        //     _changedBy: _employee,
+        //     changedAt: Date.now(),
+        //     description: {
+        //         username,
+        //         password,
+        //         role,
+        //     },
+        // });
+
+        const result = await db.updateOne({ _id, }, { $set: {
             username,
             password,
             role,
-        });
+            // changeLog: employee.changeLog,
+        }});
 
         res.status(201).json({
             status: "success",

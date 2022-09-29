@@ -1,5 +1,19 @@
 const mongoose = require('mongoose');
 
+const changeLogSchema = new mongoose.Schema({
+    _changedBy: {
+        type: mongoose.Schema.ObjectId,
+        required: [true, "'ID Pembuat/Pengubah' data tidak boleh kosong"],
+    },
+    changedAt: {
+        type: Date,
+        default: new Date(),
+    },
+    description: {
+        type: String,
+    },
+}, { _id: false });
+
 const BPJSSchema = new mongoose.Schema({
     cardNumber: {
         type: String,
@@ -42,11 +56,9 @@ const BPJSSchema = new mongoose.Schema({
         type: String,
         required: [true, "'Alamat' tidak boleh kosong"],
     },
-    // changeLog (array) (stores changes. in case when the patient's data is changed, etc)
+    changeLog: [changeLogSchema],
 }, {
     collection: 'BPJS',
 });
-
-// const changeLogSchema = new mongoose.Schema({});
 
 module.exports = mongoose.model('BPJS', BPJSSchema);

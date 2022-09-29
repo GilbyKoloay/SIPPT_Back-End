@@ -8,3 +8,4 @@
 /controllers/delete.js
 /controllers/get.js
 /controllers/getAll.js
+/models/MedicalPrescriptions.js

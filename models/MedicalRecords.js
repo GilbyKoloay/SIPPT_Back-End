@@ -1,14 +1,43 @@
 const mongoose = require('mongoose');
 
+const changeLogSchema = new mongoose.Schema({
+    _changedBy: {
+        type: mongoose.Schema.ObjectId,
+        required: [true, "'ID Pembuat/Pengubah' data tidak boleh kosong"],
+    },
+    changedAt: {
+        type: Date,
+        default: new Date(),
+    },
+    description: {
+        type: String,
+    },
+}, { _id: false });
+
+const medicalPrescriptionSchema = new mongoose.Schema({
+    drug: [{
+        drug: {
+            type: String,
+            required: [true, "'ID' obat tidak boleh kosong"],
+        },
+        description: {
+            type: String,
+            required: [true, "'Deskripsi' tidak boleh kosong"],
+        }
+    }],
+    isDone: {
+        _finishedBy: {
+            type: String,
+            required: [true, "'ID' petugas yang menyelesaikan resep obat tidak boleh kosong"],
+        },
+        changedAt: {
+            type: Date,
+            default: new Date(),
+        },
+    }
+});
+
 const recordsSchema = new mongoose.Schema({
-    _createdBy: {
-        type: String,
-        required: [true, "'ID Pegawai' tidak boleh kosong"],
-    },
-    _medicalPrescription: {
-        type: String,
-        required: [true, "'ID Resep Obat' tidak boleh kosong"],
-    },
     bodyHeight: {
         type: mongoose.Types.Decimal128,
         // required: [true, "'Tinggi Badan' tidak boleh kosong"], // tanya kalo ini wajib ato nd
@@ -44,11 +73,22 @@ const recordsSchema = new mongoose.Schema({
         // required: [true, "'Nadi' tidak boleh kosong"], // tanya kalo ini wajib ato nd
         default: null,
     },
-    his_phyExam_dia: {
+    history: {
         type: String,
-        // required: [true, "'Anamnesa/Pemeriksaan Fisik/Diagnosa' tidak boleh kosong"], // tanya kalo ini wajib ato nd
+        // required: [true, "'' tidak boleh kosong"], // tanya kalo ini wajib ato nd
         default: null,
     },
+    physicalExamination: {
+        type: String,
+        // required: [true, "'' tidak boleh kosong"], // tanya kalo ini wajib ato nd
+        default: null,
+    },
+    diagnosis: {
+        type: String,
+        // required: [true, "'' tidak boleh kosong"], // tanya kalo ini wajib ato nd
+        default: null,
+    },
+    medicalPrescription: medicalPrescriptionSchema,
     suggestion: {
         type: String,
         // required: [true, "'Anjuran' tidak boleh kosong"], // tanya kalo ini wajib ato nd
@@ -58,10 +98,12 @@ const recordsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    changeLog: [changeLogSchema],
 }, { timestamps: true });
 
 const medicalRecordsSchema = new mongoose.Schema({
     records: [recordsSchema],
+    changeLog: [changeLogSchema],
 }, { collection: 'MedicalRecords' });
 
 module.exports = mongoose.model('MedicalRecords', medicalRecordsSchema);

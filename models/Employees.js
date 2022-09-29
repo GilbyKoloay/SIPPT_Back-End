@@ -3,12 +3,15 @@ const mongoose = require('mongoose');
 const changeLogSchema = new mongoose.Schema({
     _changedBy: {
         type: mongoose.Schema.ObjectId,
-        required: [true, "'ID Pembuat/Pengubah' akun tidak boleh kosong"],
+        required: [true, "'ID Pembuat/Pengubah' data tidak boleh kosong"],
     },
     changedAt: {
         type: Date,
         default: new Date(),
-    }
+    },
+    description: {
+        type: String,
+    },
 }, { _id: false });
 
 const employeesSchema = new mongoose.Schema({
@@ -37,13 +40,5 @@ const employeesSchema = new mongoose.Schema({
 }, {
     collection: 'Employees',
 });
-
-// const loginHistorySchema = new mongoose.Schema({});
-
-// const logoutHistorySchema = new mongoose.Schema({});
-
-// const logSchema = new mongoose.Schema({});
-
-// const changeLogSchema = new mongoose.Schema({});
 
 module.exports = mongoose.model('Employees', employeesSchema);

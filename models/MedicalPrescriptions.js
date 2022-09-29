@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// revise this model and in drawio
 const medicalPrescriptionsSchema = new mongoose.Schema({
     _patient: {
         type: String,
