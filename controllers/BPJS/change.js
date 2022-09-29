@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // change data in BPJS collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
         cardNumbmer,
         name,
@@ -24,9 +25,21 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.updateOne({ _id }, {
-
-        });
+        const result = await db.updateOne({ _id },
+            { $push: { changeLog: {
+                _changedBy: _employee,
+                description: "Mengubah data BPJS",
+            }}},
+            { $set: {
+                cardNumbmer,
+                name,
+                birthDate,
+                healthFacilityLevel,
+                nursingClass,
+                NIK,
+                address,
+            }},
+        );
         
         res.status(201).json({
             status: "success",
