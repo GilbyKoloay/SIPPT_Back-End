@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // create new data in BPJS collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         cardNumber,
         name,
         birthDate,
@@ -26,6 +27,10 @@ module.exports = async (req, res) => {
             nursingClass,
             NIK,
             address,
+            changeLog: [{
+                _changedBy: _employee,
+                description: "Membuat BPJS baru",
+            }],
         });
 
         res.status(201).json({
