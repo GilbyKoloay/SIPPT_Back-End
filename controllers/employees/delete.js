@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         if(!result) {
             return res.status(404).json({
                 status: "error",
-                msg: `Pegawai tidak ditemukan`,
+                msg: `Data pegawai tidak ditemukan`,
                 desc: null,
                 data: null,
             });
