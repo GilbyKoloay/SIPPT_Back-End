@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // create new drug inside Drugs collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
         receiveTotal,
     } = req.body;
@@ -18,7 +19,17 @@ module.exports = async (req, res) => {
     }
     
     try {
-        const result = await db.updateOne({ _id }, { $push: { drug: { receiveTotal } } });
+        const result = await db.updateOne({ _id },
+            { $push: {
+                drug: {
+                    receiveTotal,
+                    // date (taken from front-end),
+                },
+                changeLog: {
+                    _changedBy: _employee,
+                    description: "Menambahkan pemasukkan obat baru",
+                }
+            }});
 
         res.status(201).json({
             status: "success",

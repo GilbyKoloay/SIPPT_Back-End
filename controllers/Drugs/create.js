@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // create new data in Drugs collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         name,
         type,
         unit,
@@ -16,6 +17,10 @@ module.exports = async (req, res) => {
             type,
             unit,
             batchNumber,
+            changeLog: [{
+                _changedBy: _employee,
+                description: "Menambahkan obat baru",
+            }],
         });
 
         res.status(201).json({

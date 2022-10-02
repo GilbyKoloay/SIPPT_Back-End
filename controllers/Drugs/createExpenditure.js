@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // create new drug inside Drugs collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
         _receive,
         expenditureTotal,
@@ -19,23 +20,39 @@ module.exports = async (req, res) => {
     }
     
     try {
-        let drugs = await db.findOne({ _id }, { drug: 1 });
+        let drugs = await db.findOne({ _id }, { drug: 1, changeLog: 1 });
         if(!drugs) {
             return res.status(404).json({
                 status: "error",
                 msg: `Obat tidak ditemukan`,
                 desc: null,
-                data: result,
+                data: null,
             });
         }
-        drugs.drug.forEach(r => {
+        if(!drugs.drug.find(r => r._id.toString() === _receive)) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Obat yang masuk tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
+        
+        drugs.drug.map(r => {
             if(r._id.toString() === _receive) {
                 r.expenditure.push({ expenditureTotal });
+                drugs.changeLog.push({
+                    _changedBy: _employee,
+                    description: "Menambahkan pengeluaran obat baru",
+                });
             }
         });
 
-        const result = await db.updateOne({ _id }, { drug: drugs.drug });
-
+        const result = await db.updateOne({ _id }, { $set: {
+            drug: drugs.drug,
+            changeLog: drugs.changeLog,
+        } });
+        
         res.status(201).json({
             status: "success",
             msg: `Berhasil menambahkan pengeluaran obat baru`,
