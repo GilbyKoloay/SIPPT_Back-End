@@ -5,6 +5,17 @@ const mongoose = require('mongoose');
 module.exports = async (req, res) => {
     const { _employee, _id, username, password, role } = req.body;
     
+    // check employee's (changedBy) id
+    if(!mongoose.Types.ObjectId.isValid(_employee)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    // check employee's id
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
@@ -15,15 +26,13 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.updateOne({ _id },
-            { $push: { changeLog: {
+        const result = await db.updateOne({ _id }, {
+            $push: { changeLog: {
                 _changedBy: _employee,
                 description: "Mengubah data pegawai",
-            }}},
-            { $set : {
-                username, password, role,
             }},
-        );
+            $set: { username, password, role },
+        });
 
         res.status(201).json({
             status: "success",

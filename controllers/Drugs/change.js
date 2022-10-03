@@ -12,6 +12,17 @@ module.exports = async (req, res) => {
         batchNumber,
     } = req.body;
 
+    // check employee's (changedBy) id
+    if(!mongoose.Types.ObjectId.isValid(_employee)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    // check drug's id
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
@@ -27,12 +38,7 @@ module.exports = async (req, res) => {
                 _changedBy: _employee,
                 description: "Mengubah data obat",
             }},
-            $set: {
-                name,
-                type,
-                unit,
-                batchNumber,
-            }
+            $set: { name, type, unit, batchNumber },
         });
         
         res.status(201).json({

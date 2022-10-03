@@ -11,10 +11,41 @@ module.exports = async (req, res) => {
         expenditureTotal,
     } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_receive) || !mongoose.Types.ObjectId.isValid(_expenditure)) {
+    // check employee's (changedBy) id
+    if(!mongoose.Types.ObjectId.isValid(_employee)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    // check drug's id
+    if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
             msg: `ID obat/pemasukkan/pengeluaran tidak valid`,
+            data: null,
+        });
+    }
+
+    // check drug receive's id
+    if(!mongoose.Types.ObjectId.isValid(_receive)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pemasukkan obat tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    // check drug expenditure's id
+    if(!mongoose.Types.ObjectId.isValid(_expenditure)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pengeluaran obat tidak valid`,
+            desc: null,
             data: null,
         });
     }

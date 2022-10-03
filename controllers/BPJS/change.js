@@ -15,6 +15,17 @@ module.exports = async (req, res) => {
         address,
     } = req.body;
 
+    // check employee's (changedBy) id
+    if(!mongoose.Types.ObjectId.isValid(_employee)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    // check bpjs' id
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
@@ -25,12 +36,12 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const result = await db.updateOne({ _id },
-            { $push: { changeLog: {
+        const result = await db.updateOne({ _id }, {
+            $push: { changeLog: {
                 _changedBy: _employee,
                 description: "Mengubah data BPJS",
-            }}},
-            { $set: {
+            }},
+            $set: {
                 cardNumbmer,
                 name,
                 birthDate,
@@ -38,8 +49,8 @@ module.exports = async (req, res) => {
                 nursingClass,
                 NIK,
                 address,
-            }},
-        );
+            },
+        });
         
         res.status(201).json({
             status: "success",

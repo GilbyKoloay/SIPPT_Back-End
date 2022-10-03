@@ -10,6 +10,16 @@ module.exports = async (req, res) => {
         unit,
         batchNumber,
     } = req.body;
+    
+    // check employee's (changedBy) id
+    if(!mongoose.Types.ObjectId.isValid(_employee)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
 
     try {
         const result = await db.create({
