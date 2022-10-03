@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // change data in Drugs collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
         name,
         type,
@@ -22,10 +23,16 @@ module.exports = async (req, res) => {
 
     try {
         const result = await db.updateOne({ _id }, {
-            name,
-            type,
-            unit,
-            batchNumber,
+            $push: { changeLog: {
+                _changedBy: _employee,
+                description: "Mengubah data obat",
+            }},
+            $set: {
+                name,
+                type,
+                unit,
+                batchNumber,
+            }
         });
         
         res.status(201).json({

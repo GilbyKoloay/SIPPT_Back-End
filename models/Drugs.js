@@ -17,7 +17,7 @@ const changeLogSchema = new mongoose.Schema({
 const expenditureSchema = new mongoose.Schema({
     expenditureDate: {
         type: Date,
-        default: new Date(), // dev
+        default: new Date(), // dev (this date should be taken from front-end)
     },
     expenditureTotal: {
         type: Number,
@@ -27,11 +27,11 @@ const expenditureSchema = new mongoose.Schema({
 const drugSchema = new mongoose.Schema({
     receiveDate: {
         type: Date,
-        default: new Date(), // dev
+        default: new Date(), // dev (this date should be taken from front-end)
     },
     expireDate: {
         type: Date,
-        default: new Date(), //dev
+        default: new Date(), //dev (this date should be taken from front-end)
     },
     receiveTotal: {
         type: Number,

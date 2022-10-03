@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // change drug data inside Drugs collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
         _receive,
         receiveTotal,
@@ -18,16 +19,8 @@ module.exports = async (req, res) => {
     }
 
     try {
-        let drugResult = await db.findOne({ _id }, { drug: 1 });
-        if(!drugResult) {
-            return res.status(404).json({
-                status: "error",
-                msg: `Obat tidak ditemukan`,
-                desc: null,
-                data: null,
-            });
-        }
-        if(drugResult.drug.length === 0) {
+        let drugs = await db.findOne({ _id }, { drug: 1, changeLog: 1});
+        if(!drugs) {
             return res.status(404).json({
                 status: "error",
                 msg: `Obat kosong`,
@@ -35,14 +28,30 @@ module.exports = async (req, res) => {
                 data: null,
             });
         }
+        if(!drugs.drug.find(r => r._id.toString() === _receive)) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Data obat yang masuk tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
 
-        drugResult.drug.forEach(r => {
+        drugs.drug.map(r => {
             if(r._id.toString() === _receive) {
                 r.receiveTotal = receiveTotal;
             }
         });
 
-        const result = await db.updateOne({ _id }, { drug: drugResult.drug })
+        const result = await db.updateOne({ _id }, {
+            $push: { changeLog: {
+                _changedBy: _employee,
+                description: "Mengubah data pemasukkan obat",
+            }},
+            $set: {
+                drug: drugs.drug,
+            },
+        });
         
         res.status(201).json({
             status: "success",

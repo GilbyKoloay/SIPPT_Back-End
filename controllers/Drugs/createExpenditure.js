@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
         if(!drugs.drug.find(r => r._id.toString() === _receive)) {
             return res.status(404).json({
                 status: "error",
-                msg: `Obat yang masuk tidak ditemukan`,
+                msg: `Data obat yang masuk tidak ditemukan`,
                 desc: null,
                 data: null,
             });

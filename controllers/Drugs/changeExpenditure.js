@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // change drug data inside Drugs collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
         _receive,
         _expenditure,
@@ -13,16 +14,48 @@ module.exports = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(_id) || !mongoose.Types.ObjectId.isValid(_receive) || !mongoose.Types.ObjectId.isValid(_expenditure)) {
         return res.status(400).json({
             status: "error",
-            msg: `ID obat tidak valid`,
+            msg: `ID obat/pemasukkan/pengeluaran tidak valid`,
             data: null,
         });
     }
 
     try {
-        let drugs = await db.findOne({ _id });
+        let drugs = await db.findOne({ _id }, { drug: 1, changeLog: 1 });
+        // check if the drug exist
+        if(!drugs) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Obat kosong`,
+                desc: null,
+                data: null,
+            });
+        }
+        // check if the receive in drug exist
+        if(!drugs.drug.find(r => r._id.toString() === _receive)) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Data obat yang masuk tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
+        // check if the expenditure in receive exist
         drugs.drug.forEach(r => {
             if(r._id.toString() === _receive) {
-                r.expenditure.forEach(e => {
+                if(!r.expenditure.find(e => e._id.toString() === _expenditure)) {
+                    return res.status(404).json({
+                        status: "error",
+                        msg: `Data obat yang keluar tidak ditemukan`,
+                        desc: null,
+                        data: null,
+                    });
+                }
+            }
+        });
+
+        drugs.drug.map(r => {
+            if(r._id.toString() === _receive) {
+                r.expenditure.map(e => {
                     if(e._id.toString() === _expenditure) {
                         e.expenditureTotal = expenditureTotal;
                     }
@@ -30,7 +63,15 @@ module.exports = async (req, res) => {
             }
         });
 
-        const result = await db.updateOne({ _id }, { drug: drugs.drug });
+        const result = await db.updateOne({ _id }, {
+            $push: { changeLog: {
+                _changedBy: _employee,
+                description: "Mengubah data pengeluaran obat",
+            }},
+            $set: {
+                drug: drugs.drug,
+            },
+        });
         
         res.status(201).json({
             status: "success",
