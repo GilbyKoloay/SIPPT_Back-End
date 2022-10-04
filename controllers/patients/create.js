@@ -15,10 +15,13 @@ module.exports = async (req, res) => {
         familyCardName,
         address,
         phoneNumber,
-        paymentMethod,
         religion,
         maritalStatus,
         job,
+        paymentMethod,
+        JKN,
+        otherInsurance,
+        number,
     } = req.body;
 
     // check employee's (changedBy) id
@@ -43,10 +46,13 @@ module.exports = async (req, res) => {
             familyCardName,
             address,
             phoneNumber,
-            paymentMethod,
             religion,
             maritalStatus,
             job,
+            paymentMethod,
+            JKN,
+            otherInsurance,
+            number,
             changeLog: [{
                 _changedBy: _employee,
                 description: "Menambahkan pasien baru",

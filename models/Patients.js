@@ -80,11 +80,6 @@ const patientsSchema = new mongoose.Schema({
         // required: [true, "'No. Telp.' tidak boleh kosong"], // tanya kalo ini wajib ato nd
         default: null,
     },
-    paymentMethod: {
-        type: String,
-        enum: ['BIAYA SENDIRI', 'UMUM'],
-        required: [true, "'Cara Pembayaran' tidak boleh kosong"],
-    },
     religion: {
         type: String,
         required: [true, "'Agama' tidak boleh kosong"],
@@ -97,6 +92,24 @@ const patientsSchema = new mongoose.Schema({
     job: {
         type: String,
         required: [true, "'Pekerjaan' tidak boleh kosong"],
+    },
+    paymentMethod: {
+        type: String,
+        enum: ['BIAYA SENDIRI', 'UMUM'],
+        required: [true, "'Cara Pembayaran' tidak boleh kosong"],
+    },
+    JKN: {
+        type: String,
+        enum: ['KM', 'KAB', 'A', 'S', 'M'],
+        required: [true, "'JKN' tidak boleh kosong"],
+    },
+    otherInsurance: {
+        type: String,
+        // required: [true, "'Insuransi Lainnya' tidak boleh kosong"], // tanya kalo ini wajib ato nd
+    },
+    number: {
+        type: Number,
+        // required: [true, "'Nomor' tidak boleh kosong"], // tanya kalo ini wajib ato nd
     },
     changeLog: [changeLogSchema],
 }, {
