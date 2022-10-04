@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 // create record in MedicalRecords collections
 module.exports = async (req, res) => {
     const {
+        _employee,
         _id,
-        _createdBy,
-        _medicalPrescription,
         bodyHeight,
         bodyWeight,
         tension,
@@ -14,11 +13,24 @@ module.exports = async (req, res) => {
         respiration,
         bodyTemperature,
         laboratorium,
-        his_phyExam_dia,
+        history,
+        physicalExamination,
+        diagnosis,
+        medicalPrescription,
         suggestion,
-        initials,
     } = req.body;
 
+    // check employee's (changedBy) id
+    if(!mongoose.Types.ObjectId.isValid(_employee)) {
+        return res.status(400).json({
+            status: "error",
+            msg: `ID pegawai tidak valid`,
+            desc: null,
+            data: null,
+        });
+    }
+
+    // check medical record's id
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
@@ -31,9 +43,6 @@ module.exports = async (req, res) => {
     try {
         const result = await db.updateOne({ _id }, { $push: {
             records: {
-                _id: mongoose.Types.ObjectId(),
-                _createdBy,
-                _medicalPrescription,
                 bodyHeight,
                 bodyWeight,
                 tension,
@@ -41,15 +50,21 @@ module.exports = async (req, res) => {
                 respiration,
                 bodyTemperature,
                 laboratorium,
-                his_phyExam_dia,
+                history,
+                physicalExamination,
+                diagnosis,
+                medicalPrescription,
                 suggestion,
-                initials,
+            },
+            changeLog: {
+                _changedBy: _employee,
+                description: "Menambah catatan baru",
             }
         }});
 
         res.status(201).json({
             status: "success",
-            msg: `Berhasil menambahkan rekaman baru di rekam medis`,
+            msg: `Berhasil menambahkan catatan baru di rekam medis`,
             desc: null,
             data: result,
         });
@@ -57,7 +72,7 @@ module.exports = async (req, res) => {
     catch(e) {
         res.status(500).json({
             status: `error`,
-            msg: `Gagal menambahkan rekaman baru di rekam medis`,
+            msg: `Gagal menambahkan catatan baru di rekam medis`,
             desc: e.message,
             data: null,
         });

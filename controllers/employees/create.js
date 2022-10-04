@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 module.exports = async (req, res) => {
     const { _employee, username, password, name, role } = req.body;
 
+    // check employee's (changedBy) id
     if(!mongoose.Types.ObjectId.isValid(_employee)) {
         return res.status(400).json({
             status: "error",

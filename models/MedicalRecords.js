@@ -17,7 +17,7 @@ const changeLogSchema = new mongoose.Schema({
 const medicalPrescriptionSchema = new mongoose.Schema({
     drug: [{
         drug: {
-            type: String,
+            type: mongoose.Schema.ObjectId,
             required: [true, "'ID' obat tidak boleh kosong"],
         },
         description: {
@@ -28,14 +28,14 @@ const medicalPrescriptionSchema = new mongoose.Schema({
     isDone: {
         _finishedBy: {
             type: String,
-            required: [true, "'ID' petugas yang menyelesaikan resep obat tidak boleh kosong"],
+            // required: [true, "'ID' petugas yang menyelesaikan resep obat tidak boleh kosong"],
         },
         changedAt: {
             type: Date,
-            default: new Date(),
+            // default: new Date(),
         },
     }
-});
+}, { _id: false });
 
 const recordsSchema = new mongoose.Schema({
     bodyHeight: {
@@ -98,7 +98,7 @@ const recordsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-}, { timestamps: true });
+}, { _id: true });
 
 const medicalRecordsSchema = new mongoose.Schema({
     records: [recordsSchema],
