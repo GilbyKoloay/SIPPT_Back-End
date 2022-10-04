@@ -2,29 +2,29 @@ const mongoose = require('mongoose');
 
 const queueSchema = new mongoose.Schema({
     _createdBy: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: [true, "'ID Pegawai' yang membuat tidak boleh kosong"],
     },
     _patient: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: [true, "'ID Pasien' tidak boleh kosong"],
     },
     _finishedBy: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: [true, "'ID Pegawai' yang menyelesaikan tidak boleh kosong"],
     },
     createdAt: {
         type: Date,
-        default: new Date(),
+        default: new Date(), // dev
     },
     status: {
         type: String,
         enum: ['SEDANG MENGANTRI', 'SUDAH DILAYANI'],
-        required: [true, "'Status' tidak boleh kosong"],
+        default: 'SENDANG MENGANTRI',
     },
     finishedAt: {
         type: Date,
-        default: null,
+        default: null, // dev
     },
 });
 

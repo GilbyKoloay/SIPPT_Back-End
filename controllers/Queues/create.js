@@ -8,12 +8,20 @@ module.exports = async (req, res) => {
         _createdBy,
         _patient,
         _finishedBy,
-        status,
     } = req.body;
 
     try {
+        const check = await db.findOne();
+        if(!check) {
+            const result = await db.create({
+                poliUmum: [],
+                poliGigi: [],
+                poliKIA: [],
+            });
+        }
+
         if(where !== 'poliUmum' && where !== 'poliGigi' && where !== 'poliKIA') {
-            return res.status(400).json({
+            return res.status(404).json({
                 status: "error",
                 msg: `Gagal menambahkan antrian baru`,
                 desc: `Tujuan antrian salah atau tidak ada`,
@@ -21,21 +29,11 @@ module.exports = async (req, res) => {
             });
         }
 
-        const values = {
+        const result = await db.updateOne({ $push: { [where]: {
             _createdBy,
             _patient,
             _finishedBy,
-            status,
-        };
-
-        // dev (use this to create doc in 'Queues' collection)
-        // const result = await db.create({
-        //     poliUmum: [],
-        //     poliGigi: [],
-        //     poliKIA: [],
-        // });
-
-        const result = await db.updateOne({ $push: { [where]: values } });
+        }}});
 
         res.status(201).json({
             status: "success",

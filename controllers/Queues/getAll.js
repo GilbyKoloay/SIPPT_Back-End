@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 // get all data in Queues collections
 module.exports = async (req, res) => {
     try {
-        const result = await db.find();
+        const result = await db.findOne({}, { __v: 0 });
 
-        if(result.length === 0) {
+        if(!result) {
             return res.status(404).json({
                 status: "error",
                 msg: `Data antrian kosong`,
