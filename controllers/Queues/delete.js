@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // delete data in Queues collections
 module.exports = async (req, res) => {
-    const { where, _id } = req.body;
+    const { _id, _finishedBy, where } = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
@@ -15,8 +15,23 @@ module.exports = async (req, res) => {
     }
 
     try {
-        let data = await db.findOne();
-        data[where] = data[where].filter(r => r._id.toString() !== _id);
+        let data = await db.findOne({}, { __v: 0 });
+        if(!data[where].find(q => q._id.toString() === _id)) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Antrian tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
+
+        data[where].map(q => {
+            if(q._id.toString() === _id) {
+                q._finishedBy = _finishedBy;
+                q.finishedAt = new Date();
+                q.status = "SUDAH DILAYANI";
+            }
+        });
         
         const result = await db.updateOne(data);
 

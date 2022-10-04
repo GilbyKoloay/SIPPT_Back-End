@@ -7,7 +7,6 @@ module.exports = async (req, res) => {
         where,
         _createdBy,
         _patient,
-        _finishedBy,
     } = req.body;
 
     try {
@@ -29,11 +28,7 @@ module.exports = async (req, res) => {
             });
         }
 
-        const result = await db.updateOne({ $push: { [where]: {
-            _createdBy,
-            _patient,
-            _finishedBy,
-        }}});
+        const result = await db.updateOne({ $push: { [where]: { _createdBy, _patient }}});
 
         res.status(201).json({
             status: "success",

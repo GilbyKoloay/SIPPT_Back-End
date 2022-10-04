@@ -11,7 +11,7 @@ const queueSchema = new mongoose.Schema({
     },
     _finishedBy: {
         type: mongoose.Schema.ObjectId,
-        required: [true, "'ID Pegawai' yang menyelesaikan tidak boleh kosong"],
+        default: null,
     },
     createdAt: {
         type: Date,
@@ -24,7 +24,7 @@ const queueSchema = new mongoose.Schema({
     },
     finishedAt: {
         type: Date,
-        default: null, // dev
+        default: null,
     },
 });
 
