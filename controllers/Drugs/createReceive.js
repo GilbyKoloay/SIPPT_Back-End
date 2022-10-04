@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
     
     try {
         const result = await db.updateOne({ _id }, { $push: {
-            drug: { receiveTotal, date /* taken from front end */ },
+            drug: { receiveTotal, /* date  (taken from front end) */ },
             changeLog: {
                 _changedBy: _employee,
                 description: "Menambahkkan pemasukkan obat baru",

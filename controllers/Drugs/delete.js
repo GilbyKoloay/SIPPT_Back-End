@@ -15,6 +15,17 @@ module.exports = async (req, res) => {
     }
 
     try {
+        const drug = await db.findOne({ _id });
+        // check if drug exist
+        if(!drug) {
+            return res.status(404).json({
+                status: "error",
+                msg: `Data obat tidak ditemukan`,
+                desc: null,
+                data: null,
+            });
+        }
+
         const result = await db.deleteOne({ _id });
         
         res.status(200).json({

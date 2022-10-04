@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 module.exports = async (req, res) => {
     const { _id } = req.body;
 
+    // check drug's id
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({
             status: "error",
