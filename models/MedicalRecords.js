@@ -98,7 +98,6 @@ const recordsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    changeLog: [changeLogSchema],
 }, { timestamps: true });
 
 const medicalRecordsSchema = new mongoose.Schema({
