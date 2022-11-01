@@ -17,7 +17,7 @@ const changeLogSchema = new mongoose.Schema({
 const expenditureSchema = new mongoose.Schema({
     expenditureDate: {
         type: Date,
-        default: new Date(), // dev (this date should be taken from front-end)
+        // default: new Date(), // dev (this date should be taken from front-end)
     },
     expenditureTotal: {
         type: Number,
@@ -27,11 +27,11 @@ const expenditureSchema = new mongoose.Schema({
 const drugSchema = new mongoose.Schema({
     receiveDate: {
         type: Date,
-        default: new Date(), // dev (this date should be taken from front-end)
+        // default: new Date(), // dev (this date should be taken from front-end)
     },
     expireDate: {
         type: Date,
-        default: new Date(), //dev (this date should be taken from front-end)
+        // default: new Date(), //dev (this date should be taken from front-end)
     },
     receiveTotal: {
         type: Number,
@@ -45,12 +45,12 @@ const drugsSchema = new mongoose.Schema({
         required: [true, "'Nama Obat' tidak boleh kosong"],
         unique: [true, "'Nama Obat' sudah terdaftar"],
     },
-    type: {
+    type: { // golongan
         type: String,
         enum: ['TABLET', 'KAPSUL', 'KAPLET', 'SIRUP', 'DROPS', 'SALEP', 'TETES', 'KRIM', 'GEL', 'SUPOSITORIA', 'INJEKSI', 'CAIRAN INFUS', 'BMHP'],
         required: [true, "'Tipe Obat' tidak boleh kosong"],
     },
-    unit: {
+    unit: { // satuan
         type: String,
         enum: ['TABLET', 'BOTOL', 'BOX', 'ROLL', 'SATCHET'],
         required: [true, "'Unit Obat' tidak boleh kosong"],

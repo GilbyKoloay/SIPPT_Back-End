@@ -38,6 +38,10 @@ const medicalPrescriptionSchema = new mongoose.Schema({
 }, { _id: false });
 
 const recordsSchema = new mongoose.Schema({
+    date: {
+        type: Date,
+        required: [true, "'Tanggal' pengisian rekam medis tidak boleh kosong"],
+    },
     bodyHeight: {
         type: mongoose.Types.Decimal128,
         // required: [true, "'Tinggi Badan' tidak boleh kosong"], // tanya kalo ini wajib ato nd
@@ -88,7 +92,11 @@ const recordsSchema = new mongoose.Schema({
         // required: [true, "'' tidak boleh kosong"], // tanya kalo ini wajib ato nd
         default: null,
     },
-    medicalPrescription: medicalPrescriptionSchema,
+    // medicalPrescription: medicalPrescriptionSchema,
+    medicalPrescription: { // dev
+        type: String,
+        required: [true, "'Terapi dan Tindakan' tidak boleh kosong"],
+    },
     suggestion: {
         type: String,
         // required: [true, "'Anjuran' tidak boleh kosong"], // tanya kalo ini wajib ato nd

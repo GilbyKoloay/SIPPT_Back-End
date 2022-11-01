@@ -13,7 +13,7 @@ const deleteRecord = require('../controllers/MedicalRecords/deleteRecord');
 const router = express.Router();
 
 router.get('/getAll', getAll);                  // get all medical records
-router.get('/get', get);                        // get medical record
+router.get('/get:_id', get);                        // get medical record
 router.post('/create', create);                 // create medical record
 router.delete('/delete', deleteData);           // delete medical record
 router.get('/getRecord', getRecord);            // get record in medical record

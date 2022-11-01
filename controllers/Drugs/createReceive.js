@@ -7,6 +7,8 @@ module.exports = async (req, res) => {
         _employee,
         _id,
         receiveTotal,
+        receiveDate,
+        expireDate,
     } = req.body;
 
     // check employee's (changedBy) id
@@ -31,7 +33,11 @@ module.exports = async (req, res) => {
     
     try {
         const result = await db.updateOne({ _id }, { $push: {
-            drug: { receiveTotal, /* date  (taken from front end) */ },
+            drug: { 
+                receiveTotal, 
+                receiveDate: new Date(`${receiveDate.year}/${receiveDate.month}/${(parseInt(receiveDate.date)+1).toString()}`), 
+                expireDate: new Date(`${expireDate.year}/${expireDate.month}/${(parseInt(expireDate.date)+1).toString()}`)
+            },
             changeLog: {
                 _changedBy: _employee,
                 description: "Menambahkkan pemasukkan obat baru",

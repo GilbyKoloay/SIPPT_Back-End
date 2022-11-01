@@ -10,7 +10,7 @@ const deleteData = require('../controllers/BPJS/delete');
 const router = express.Router();
 
 router.get('/getAll', getAll);          // get all BPJS
-router.get('/get', get);                // get BPJS
+router.get('/get:_id', get);            // get BPJS
 router.post('/create', create);         // create BPJS
 router.patch('/change', change);        // change BPJS
 router.delete('/delete', deleteData);   // delete BPJS

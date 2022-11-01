@@ -8,7 +8,9 @@ module.exports = async (req, res) => {
         _id,
         _receive,
         expenditureTotal,
+        expenditureDate,
     } = req.body;
+    console.log(req.body); // dev
 
     // check employee's (changedBy) id
     if(!mongoose.Types.ObjectId.isValid(_employee)) {
@@ -63,7 +65,10 @@ module.exports = async (req, res) => {
         
         drugs.drug.map(r => {
             if(r._id.toString() === _receive) {
-                r.expenditure.push({ expenditureTotal });
+                r.expenditure.push({
+                    expenditureTotal,
+                    expenditureDate: new Date(`${expenditureDate.year}/${expenditureDate.month}/${(parseInt(expenditureDate.date)+1).toString()}`)
+                });
                 drugs.changeLog.push({
                     _changedBy: _employee,
                     description: "Menambahkan pengeluaran obat baru",

@@ -48,7 +48,7 @@ const BPJSSchema = new mongoose.Schema({
         default: null,
     },
     NIK: {
-        type: String,
+        type: Number,
         required: [true, "'NIK' tidak boleh kosong"],
         unique: true,
     },

@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
     const {
         _employee,
         _id,
+        date,
         bodyHeight,
         bodyWeight,
         tension,
@@ -43,6 +44,7 @@ module.exports = async (req, res) => {
     try {
         const result = await db.updateOne({ _id }, { $push: {
             records: {
+                date: new Date(`${date.year}/${date.month}/${(parseInt(date.date)+1).toString()}`),
                 bodyHeight,
                 bodyWeight,
                 tension,

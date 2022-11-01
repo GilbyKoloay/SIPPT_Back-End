@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 // get single data in MedicalRecords collections
 module.exports = async (req, res) => {
-    const { _id } = req.body;
+    let { _id } = req.params;
+    _id = _id.substring(1);
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({

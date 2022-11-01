@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // get all data in Drugs collections
 module.exports = async (req, res) => {
     try {
-        const result = await db.find();
+        const result = await db.find({}, { __v: 0 });
 
         if(result.length === 0) {
             return res.status(404).json({
