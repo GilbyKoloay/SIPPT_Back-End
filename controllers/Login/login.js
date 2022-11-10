@@ -10,6 +10,13 @@ module.exports = async (req, res) => {
     const { username, password } = req.body;
 
     try {
+        // const test = await db.find();
+        // console.log(`test`, test);
+
+        // const dbConnect = dbo.getDb();
+        
+        
+
         // username checking
         const usernameResult = await db.findOne({ username });
         if(!usernameResult) {

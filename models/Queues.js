@@ -20,7 +20,7 @@ const queueSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['SEDANG MENGANTRI', 'SUDAH DILAYANI'],
-        default: 'SENDANG MENGANTRI',
+        default: 'SEDANG MENGANTRI',
     },
     finishedAt: {
         type: Date,

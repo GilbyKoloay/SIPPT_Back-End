@@ -45,15 +45,15 @@ const drugsSchema = new mongoose.Schema({
         required: [true, "'Nama Obat' tidak boleh kosong"],
         unique: [true, "'Nama Obat' sudah terdaftar"],
     },
-    type: { // golongan
+    preparationType: { // golongan
         type: String,
-        enum: ['TABLET', 'KAPSUL', 'KAPLET', 'SIRUP', 'DROPS', 'SALEP', 'TETES', 'KRIM', 'GEL', 'SUPOSITORIA', 'INJEKSI', 'CAIRAN INFUS', 'BMHP'],
-        required: [true, "'Tipe Obat' tidak boleh kosong"],
+        enum: ['SERBUK', 'TABLET', 'KAPSUL', 'PIL', 'LARUTAN', 'SUSPENSI', 'CAIRAN INFUS', 'SALEP', 'VAKSIN', 'SUPPOSITORIA', 'OBAT TETES', 'INJEKSI', 'BMHP', 'ALAT KESEHATAN'],
+        required: [true, "'Jenis Sediaan' tidak boleh kosong"],
     },
     unit: { // satuan
         type: String,
-        enum: ['TABLET', 'BOTOL', 'BOX', 'ROLL', 'SATCHET'],
-        required: [true, "'Unit Obat' tidak boleh kosong"],
+        enum: ['SACHET', 'TABLET', 'KAPSUL', 'PIL', 'BOTOL', 'POT', 'TUBE', 'VIAL', 'SUPPOSITORIA', 'AMPUL', 'VIAL', 'STRIP', 'PIECES', 'ROL', 'SET'],
+        required: [true, "'Satuan' tidak boleh kosong"],
     },
     drug: [drugSchema],
     batchNumber: {

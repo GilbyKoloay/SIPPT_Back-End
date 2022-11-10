@@ -10,13 +10,20 @@ const app = express();
 
 // CORS handler
 app.use(cors());
+// app.use((req, res, next)=>{
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept');
+//     next();
+// });
 
 // middleware
 app.use(express.json());
 
 // middleware (dev)
+const util = require('util');
 app.use((req, res, next) => {
-    console.log(`${req.path} | ${req.method}`);
+    console.log(`${req.ip.split('::ffff:')[1]} \t| ${req.method} \t| ${req.path} \t ${req.body && util.inspect(req.body, {showHidden: false, depth: null, colors: true})}`);
     next();
 });
 

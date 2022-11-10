@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     const {
         _employee,
         name,
-        type,
+        preparationType,
         unit,
         batchNumber,
     } = req.body;
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     try {
         const result = await db.create({
             name,
-            type,
+            preparationType,
             unit,
             batchNumber,
             changeLog: [{

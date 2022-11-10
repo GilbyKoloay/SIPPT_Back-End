@@ -16,14 +16,14 @@ const changeLogSchema = new mongoose.Schema({
 
 const patientsSchema = new mongoose.Schema({
     _medicalRecord: {
-        type: String,
-        // required: [true, "'ID Rekam Medis' tidak boleh kosong"],
-        default: null, // dev mode
+        type: mongoose.Schema.ObjectId,
+        required: [true, "'ID Rekam Medis' tidak boleh kosong"],
+        // default: null, // dev mode
     },
     _BPJS: {
-        type: String,
-        // required: [true, "'ID BPJS' tidak boleh kosong"],
-        default: null, // dev mode
+        type: mongoose.Schema.ObjectId,
+        required: [true, "'ID BPJS' tidak boleh kosong"],
+        // default: null, // dev mode
     },
     medicalRecordNumber: {
         type: Number,

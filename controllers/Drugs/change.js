@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
         _employee,
         _id,
         name,
-        type,
+        preparationType,
         unit,
         batchNumber,
     } = req.body;
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
                 _changedBy: _employee,
                 description: "Mengubah data obat",
             }},
-            $set: { name, type, unit, batchNumber },
+            $set: { name, preparationType, unit, batchNumber },
         });
         
         res.status(201).json({
