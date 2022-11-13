@@ -8,6 +8,13 @@ require('dotenv').config();
 // create express app
 const app = express();
 
+// Front-End
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 // CORS handler
 app.use(cors());
 
