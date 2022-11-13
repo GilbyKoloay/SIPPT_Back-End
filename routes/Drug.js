@@ -1,17 +1,17 @@
 const express = require('express');
 
 // import Drugs controllers
-const getAll = require('../controllers/drugs/getAll');
-const get = require('../controllers/drugs/get');
-const create = require('../controllers/drugs/create');
-const change = require('../controllers/drugs/change');
-const deleteData = require('../controllers/drugs/delete');
-const createReceive = require('../controllers/drugs/createReceive');
-const changeReceive = require('../controllers/drugs/changeReceive');
-const deleteReceive = require('../controllers/drugs/deleteReceive');
-const createExpenditure = require('../controllers/drugs/createExpenditure');
-const changeExpenditure = require('../controllers/drugs/changeExpenditure');
-const deleteExpenditure = require('../controllers/drugs/deleteExpenditure');
+const getAll = require('../controllers/Drugs/getAll');
+const get = require('../controllers/Drugs/get');
+const create = require('../controllers/Drugs/create');
+const change = require('../controllers/Drugs/change');
+const deleteData = require('../controllers/Drugs/delete');
+const createReceive = require('../controllers/Drugs/createReceive');
+const changeReceive = require('../controllers/Drugs/changeReceive');
+const deleteReceive = require('../controllers/Drugs/deleteReceive');
+const createExpenditure = require('../controllers/Drugs/createExpenditure');
+const changeExpenditure = require('../controllers/Drugs/changeExpenditure');
+const deleteExpenditure = require('../controllers/Drugs/deleteExpenditure');
 
 const router = express.Router();
 

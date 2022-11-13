@@ -10,20 +10,14 @@ const app = express();
 
 // CORS handler
 app.use(cors());
-// app.use((req, res, next)=>{
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept');
-//     next();
-// });
 
 // middleware
 app.use(express.json());
 
 // middleware (dev)
-const util = require('util');
+// const util = require('util'); // local
 app.use((req, res, next) => {
-    console.log(`${req.ip.split('::ffff:')[1]} \t| ${req.method} \t| ${req.path} \t ${req.body && util.inspect(req.body, {showHidden: false, depth: null, colors: true})}`);
+    // console.log(`${req.ip.split('::ffff:')[1]} \t| ${req.method} \t| ${req.path} \t ${req.body && util.inspect(req.body, {showHidden: false, depth: null, colors: true})}`); // local
     next();
 });
 
@@ -64,13 +58,13 @@ app.use((req, res) => {
 });
 
 // connect to database and listen for requests
-mongoose.connect(process.env.DATABASE_URI)
+mongoose.connect(process.env.DATABASE_URI || 'mongodb+srv://SIPPT:DatabasePasswordInDevelopmentModeChangeThisBeforeDeployment@sippt.mgnnzsg.mongodb.net/SIPPT')
     .then(() => {
         console.log(`Database connection successful.`);
 
         // listen for requests
-        app.listen(process.env.PORT, () => {
-            console.log(`Listening on port ${process.env.PORT}.`);
+        app.listen(process.env.PORT || 4000, () => {
+            console.log(`Listening on port ${process.env.PORT || 4000}.`);
         });
     })
     .catch((e) => {

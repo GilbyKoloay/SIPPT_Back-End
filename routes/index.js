@@ -6,7 +6,7 @@ const patientsRouter = require('./Patients');
 const BPJSRouter = require('./BPJS');
 const medicalRecordsRouter = require('./MedicalRecords');
 const queueRouter = require('./Queues');
-const drugRouter = require('./drug');
+const drugRouter = require('./Drug');
 
 module.exports = {
     loginRouter,
